@@ -54,7 +54,11 @@ body {
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
+<<<<<<< HEAD
   overflow: smooth;
+=======
+  overflow: scroll;
+>>>>>>> f410bfb921d3f512ba1a2f46faea4a004304cd91
   position: relative;
 }
 
@@ -138,7 +142,11 @@ body {
 .list {
   list-style: none;
   padding: 0.8rem 0;
+<<<<<<< HEAD
   overflow: smooth;
+=======
+  overflow: scroll;
+>>>>>>> f410bfb921d3f512ba1a2f46faea4a004304cd91
 }
 
 .list-watched {
