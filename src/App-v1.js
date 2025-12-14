@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-
-//http://www.omdbapi.com/?i=tt3896198&apikey=967f0912
+import { useState } from "react";
 
 const tempMovieData = [
   {
@@ -51,59 +49,14 @@ const tempWatchedData = [
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
-const KEY = "967f0912";
-const tempQuery = "inception";
+
 export default function App() {
-  // const [movies, setMovies] = useState(tempMovieData);
-  // const [watched, setWatched] = useState(tempWatchedData);
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
-
-  useEffect(function () {
-    async function fetchMovies() {
-      console.log("- " + isLoading);
-      try {
-        setIsLoading(true);
-        console.log("$ " + isLoading);
-        const res = await fetch(
-          `http://omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
-        );
-        if (!res.ok) {
-          throw new Error("Somethng went wrong with fetching movies");
-        }
-        const data = await res.json();
-        if (data.Response === "False") {
-          throw new Error("Movie not found");
-        }
-        console.log(data);
-        setMovies(data.Search);
-        //console.log(movies);
-        // fetch(
-        //   `http://omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
-        // );
-        // .then((res) => res.json())
-        //   .then((data) => setMovies(data.Search));
-      } catch (err) {
-        console.log(err.message);
-        setError(err.message);
-        //setIsError(true);
-      } finally {
-        console.log("R- " + isLoading);
-        setIsLoading(false);
-        console.log("R$ " + isLoading);
-      }
-    }
-    fetchMovies();
-  }, []);
-
+  const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
   return (
     <>
       <NavBar>
-        <Search query={query} setQuery={setQuery}></Search>
+        <Search></Search>
         <NumResult movies={movies}></NumResult>
       </NavBar>
 
@@ -118,10 +71,7 @@ export default function App() {
           }
         ></Box> */}
         <Box>
-          {console.log(" isloading ->   " + isLoading)}
-          {isLoading && <Loader></Loader>}
-          {!isLoading && !error && <MovieList movies={movies}></MovieList>}
-          {error && <ErrorMesage message={error}></ErrorMesage>}
+          <MovieList movies={movies}></MovieList>
         </Box>
         <Box>
           {" "}
@@ -133,17 +83,6 @@ export default function App() {
   );
 }
 
-function ErrorMesage({ message }) {
-  return (
-    <p className="error">
-      <span>☹</span>
-      {" " + message}
-    </p>
-  );
-}
-function Loader() {
-  return <p className="loader">Loading...</p>;
-}
 function NavBar({ children }) {
   return (
     <nav className="nav-bar">
@@ -168,8 +107,8 @@ function Logo() {
   );
 }
 
-function Search({ query, setQuery }) {
-  //const [query, setQuery] = useState("");
+function Search() {
+  const [query, setQuery] = useState("");
   return (
     <input
       className="search"
