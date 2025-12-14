@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import StarRating from "./StarRating";
 import "./index.css";
 import App from "./App";
+import "./index.css";
+import App from "./App";
 
 function Test() {
   const [ratings, setOnRating] = useState(0);
@@ -17,6 +19,8 @@ function Test() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <App />
+    {/* <StarRating
     <App />
     {/* <StarRating
       maxRating={"3"}
